@@ -34,6 +34,12 @@ public class ProyekService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Proyek tidak ditemukan"));
     }
 
+    public ProyekLokasi getProyekLokasiByProyekId(Long proyekId) {
+        return proyekLokasiRepository.findByProyekId(proyekId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Relasi Proyek dan Lokasi tidak ditemukan"));
+    }
+
+
     public Proyek saveProyek(Proyek proyek, Long lokasiId) {
         Lokasi lokasi = lokasiRepository.findById(lokasiId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lokasi tidak ditemukan"));

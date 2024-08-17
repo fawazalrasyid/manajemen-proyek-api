@@ -26,8 +26,31 @@ public class ProyekController {
         Map<String, Object> response = new LinkedHashMap<>();
         try {
             Proyek savedProyek = proyekService.saveProyek(proyek, lokasiId);
+
+            ProyekLokasi proyekLokasi = proyekService.getProyekLokasiByProyekId(savedProyek.getId());
+
+            Map<String, Object> proyekData = new LinkedHashMap<>();
+            proyekData.put("id", savedProyek.getId());
+            proyekData.put("namaProyek", savedProyek.getNamaProyek());
+            proyekData.put("client", savedProyek.getClient());
+            proyekData.put("tglMulai", savedProyek.getTglMulai());
+            proyekData.put("tglSelesai", savedProyek.getTglSelesai());
+            proyekData.put("pimpinanProyek", savedProyek.getPimpinanProyek());
+            proyekData.put("keterangan", savedProyek.getKeterangan());
+            proyekData.put("createdAt", savedProyek.getCreatedAt());
+
+            Map<String, Object> lokasiData = new LinkedHashMap<>();
+            lokasiData.put("id", proyekLokasi.getLokasi().getId());
+            lokasiData.put("namaLokasi", proyekLokasi.getLokasi().getNamaLokasi());
+            lokasiData.put("negara", proyekLokasi.getLokasi().getNegara());
+            lokasiData.put("provinsi", proyekLokasi.getLokasi().getProvinsi());
+            lokasiData.put("kota", proyekLokasi.getLokasi().getKota());
+            lokasiData.put("createdAt", proyekLokasi.getLokasi().getCreatedAt());
+
+            proyekData.put("lokasi", lokasiData);
+
             response.put("message", "Proyek berhasil ditambahkan");
-            response.put("data", savedProyek);
+            response.put("data", proyekData);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (ResponseStatusException e) {
             response.put("message", e.getReason());
@@ -88,8 +111,31 @@ public class ProyekController {
             Long lokasiId = request.containsKey("lokasiId") ? ((Number) request.get("lokasiId")).longValue() : null;
 
             Proyek updatedProyek = proyekService.updateProyek(id, proyek, lokasiId);
+
+            ProyekLokasi proyekLokasi = proyekService.getProyekLokasiByProyekId(updatedProyek.getId());
+
+            Map<String, Object> proyekData = new LinkedHashMap<>();
+            proyekData.put("id", updatedProyek.getId());
+            proyekData.put("namaProyek", updatedProyek.getNamaProyek());
+            proyekData.put("client", updatedProyek.getClient());
+            proyekData.put("tglMulai", updatedProyek.getTglMulai());
+            proyekData.put("tglSelesai", updatedProyek.getTglSelesai());
+            proyekData.put("pimpinanProyek", updatedProyek.getPimpinanProyek());
+            proyekData.put("keterangan", updatedProyek.getKeterangan());
+            proyekData.put("createdAt", updatedProyek.getCreatedAt());
+
+            Map<String, Object> lokasiData = new LinkedHashMap<>();
+            lokasiData.put("id", proyekLokasi.getLokasi().getId());
+            lokasiData.put("namaLokasi", proyekLokasi.getLokasi().getNamaLokasi());
+            lokasiData.put("negara", proyekLokasi.getLokasi().getNegara());
+            lokasiData.put("provinsi", proyekLokasi.getLokasi().getProvinsi());
+            lokasiData.put("kota", proyekLokasi.getLokasi().getKota());
+            lokasiData.put("createdAt", proyekLokasi.getLokasi().getCreatedAt());
+
+            proyekData.put("lokasi", lokasiData);
+
             response.put("message", "Proyek berhasil diperbarui");
-            response.put("data", updatedProyek);
+            response.put("data", proyekData);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (ResponseStatusException e) {
             response.put("message", e.getReason());

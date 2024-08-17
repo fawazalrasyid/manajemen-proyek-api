@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProyekLokasiRepository extends JpaRepository<ProyekLokasi, Long> {
@@ -18,5 +19,5 @@ public interface ProyekLokasiRepository extends JpaRepository<ProyekLokasi, Long
     @Query("DELETE FROM ProyekLokasi pl WHERE pl.proyek = :proyek")
     void deleteByProyek(Proyek proyek);
 
-    List<ProyekLokasi> findByProyek(Proyek proyek);
+    Optional<ProyekLokasi> findByProyekId(Long proyekId);
 }
