@@ -1,4 +1,4 @@
-package com.fawazalrasyid.api.model;
+package com.fawazalrasyid.manajemenproyekapi.model;
 
 import jakarta.persistence.*;
 

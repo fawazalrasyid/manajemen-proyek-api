@@ -1,7 +1,7 @@
-package com.fawazalrasyid.api.service;
+package com.fawazalrasyid.manajemenproyekapi.service;
 
-import com.fawazalrasyid.api.model.Lokasi;
-import com.fawazalrasyid.api.repository.LokasiRepository;
+import com.fawazalrasyid.manajemenproyekapi.model.Lokasi;
+import com.fawazalrasyid.manajemenproyekapi.repository.LokasiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

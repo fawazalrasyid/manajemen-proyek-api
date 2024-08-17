@@ -1,10 +1,10 @@
-package com.fawazalrasyid.api;
+package com.fawazalrasyid.manajemenproyekapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApiApplicationTests {
+class ManajemenProyekApiApplicationTests {
 
 	@Test
 	void contextLoads() {

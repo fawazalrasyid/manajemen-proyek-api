@@ -1,13 +1,13 @@
-package com.fawazalrasyid.api;
+package com.fawazalrasyid.manajemenproyekapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ApiApplication {
+public class ManajemenProyekApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiApplication.class, args);
+		SpringApplication.run(ManajemenProyekApiApplication.class, args);
 	}
 
 }

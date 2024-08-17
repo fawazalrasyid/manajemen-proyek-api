@@ -1,6 +1,6 @@
-package com.fawazalrasyid.api.repository;
+package com.fawazalrasyid.manajemenproyekapi.repository;
 
-import com.fawazalrasyid.api.model.Proyek;
+import com.fawazalrasyid.manajemenproyekapi.model.Proyek;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

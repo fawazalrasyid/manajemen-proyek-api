@@ -1,7 +1,7 @@
-package com.fawazalrasyid.api.controller;
+package com.fawazalrasyid.manajemenproyekapi.controller;
 
-import com.fawazalrasyid.api.model.Lokasi;
-import com.fawazalrasyid.api.service.LokasiService;
+import com.fawazalrasyid.manajemenproyekapi.model.Lokasi;
+import com.fawazalrasyid.manajemenproyekapi.service.LokasiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,11 +1,11 @@
-package com.fawazalrasyid.api.service;
+package com.fawazalrasyid.manajemenproyekapi.service;
 
-import com.fawazalrasyid.api.model.Lokasi;
-import com.fawazalrasyid.api.model.Proyek;
-import com.fawazalrasyid.api.model.ProyekLokasi;
-import com.fawazalrasyid.api.repository.LokasiRepository;
-import com.fawazalrasyid.api.repository.ProyekLokasiRepository;
-import com.fawazalrasyid.api.repository.ProyekRepository;
+import com.fawazalrasyid.manajemenproyekapi.model.Lokasi;
+import com.fawazalrasyid.manajemenproyekapi.model.Proyek;
+import com.fawazalrasyid.manajemenproyekapi.model.ProyekLokasi;
+import com.fawazalrasyid.manajemenproyekapi.repository.LokasiRepository;
+import com.fawazalrasyid.manajemenproyekapi.repository.ProyekLokasiRepository;
+import com.fawazalrasyid.manajemenproyekapi.repository.ProyekRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,8 +25,8 @@ public class ProyekService {
     @Autowired
     private ProyekLokasiRepository proyekLokasiRepository;
 
-    public List<Proyek> getAllProyek() {
-        return proyekRepository.findAll();
+    public List<ProyekLokasi> getAllProyek() {
+        return proyekLokasiRepository.findAll();
     }
 
     public Proyek getProyekById(Long id) {
@@ -38,10 +38,8 @@ public class ProyekService {
         Lokasi lokasi = lokasiRepository.findById(lokasiId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lokasi tidak ditemukan"));
 
-        // Simpan proyek
         Proyek savedProyek = proyekRepository.save(proyek);
 
-        // Simpan relasi
         ProyekLokasi proyekLokasi = new ProyekLokasi();
         proyekLokasi.setProyek(savedProyek);
         proyekLokasi.setLokasi(lokasi);
@@ -50,15 +48,28 @@ public class ProyekService {
         return savedProyek;
     }
 
-    public Proyek updateProyek(Long id, Proyek proyek) {
+    public Proyek updateProyek(Long id, Proyek proyek, Long lokasiId) {
         Proyek existingProyek = proyekRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Proyek tidak ditemukan"));
+
         existingProyek.setNamaProyek(proyek.getNamaProyek());
         existingProyek.setClient(proyek.getClient());
         existingProyek.setTglMulai(proyek.getTglMulai());
         existingProyek.setTglSelesai(proyek.getTglSelesai());
         existingProyek.setPimpinanProyek(proyek.getPimpinanProyek());
         existingProyek.setKeterangan(proyek.getKeterangan());
+
+        if (lokasiId != null) {
+            Lokasi lokasi = lokasiRepository.findById(lokasiId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Lokasi tidak ditemukan"));
+
+            proyekLokasiRepository.deleteByProyek(existingProyek);
+            ProyekLokasi proyekLokasi = new ProyekLokasi();
+            proyekLokasi.setProyek(existingProyek);
+            proyekLokasi.setLokasi(lokasi);
+            proyekLokasiRepository.save(proyekLokasi);
+        }
+
         return proyekRepository.save(existingProyek);
     }
 
@@ -66,10 +77,7 @@ public class ProyekService {
         Proyek existingProyek = proyekRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Proyek tidak ditemukan"));
 
-        // Hapus relasi
         proyekLokasiRepository.deleteByProyek(existingProyek);
-
-        // Hapus proyek
         proyekRepository.delete(existingProyek);
     }
 }
