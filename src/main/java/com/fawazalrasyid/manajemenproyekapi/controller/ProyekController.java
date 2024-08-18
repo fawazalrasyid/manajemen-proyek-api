@@ -134,7 +134,7 @@ public class ProyekController {
 
             proyekData.put("lokasi", lokasiData);
 
-            response.put("message", "Proyek berhasil diperbarui");
+            response.put("message", "Proyek berhasil diupdate");
             response.put("data", proyekData);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (ResponseStatusException e) {

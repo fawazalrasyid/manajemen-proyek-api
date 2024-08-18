@@ -61,7 +61,7 @@ public class LokasiController {
         Map<String, Object> response = new LinkedHashMap<>();
         try {
             Lokasi updatedLokasi = lokasiService.updateLokasi(id, lokasi);
-            response.put("message", "Lokasi ditemukan");
+            response.put("message", "Lokasi berhasil diupdate");
             response.put("data", updatedLokasi);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (ResponseStatusException e) {
